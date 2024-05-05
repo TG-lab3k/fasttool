@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时间戳转换工具</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #16181C;
+            color: #FFFFFF;
+        }
+        .header {
+            background-color: #252A30;
+            border-bottom: 1px solid #1D1F23;
+            height: 80px;
+            text-align: center;
+            line-height: 80px;
+        }
+        .content {
+            margin: 0 300px;
+            background-color: #252A30;
+            padding: 20px;
+        }
+        .title {
+            font-size: 14px;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+        }
+        .timestamp {
+            font-size: 28px;
+            font-weight: bold;
+            margin-right: 20px;
+            color: #FFFFFF;
+        }
+        .converter {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #FFFFFF;
+        }
+        input[type="text"] {
+            width: 160px;
+            padding: 10px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #1D1F23;
+            background-color: #1D1F23;
+            color: #FFFFFF;
+        }
+        input[list] {
+            width: 160px;
+            padding: 10px;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #1D1F23;
+            background-color: #1D1F23;
+            color: #FFFFFF;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #1D1F23;
+            background-color: #1D1F23;
+            color: #FFFFFF;
+            cursor: pointer;
+        }
+        .btn {
+            padding: 10px 20px;
+            background-color: #3298DC;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 60px;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #0F6AB4;
+        }
+        .label {
+            font-size: 18px;
+            font-weight: bold;
+            margin-right: 20px;
+            color: #FFFFFF;
+        }
+        .input-group {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .timestamp-label {
+            font-size: 28px;
+            font-weight: bold;
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        时间戳转换工具
+    </div>
+    <div class="content">
+        <div class="title">当前时间</div>
+        <span class="timestamp">1714808649</span>
+        <div class="converter">时间戳转换</div>
+        <input type="text" placeholder="秒/毫秒">
+        <input list="timezones" placeholder="时区">
+        <datalist id="timezones">
+            <option value="UTC-12">
+            <option value="UTC-11">
+            <option value="UTC-10">
+            <option value="UTC-9">
+            <option value="UTC-8">
+            <option value="UTC-7">
+            <option value="UTC-6">
+            <option value="UTC-5">
+            <option value="UTC-4">
+            <option value="UTC-3">
+            <option value="UTC-2">
+            <option value="UTC-1">
+            <option value="UTC">
+            <option value="UTC+1">
+            <option value="UTC+2">
+            <option value="UTC+3">
+            <option value="UTC+4">
+            <option value="UTC+5">
+            <option value="UTC+6">
+            <option value="UTC+7">
+            <option value="UTC+8">
+            <option value="UTC+9">
+            <option value="UTC+10">
+            <option value="UTC+11">
+            <option value="UTC+12">
+        </datalist>
+        <input type="text" placeholder="格式">
+        <button class="btn">转换</button>
+        <div style="margin-top: 20px;"></div>
+        <div class="title">Asia/Shanghai: 2024-05-04 15:44:09.010</div>
+        <div style="height: 60px;"></div>
+        <span class="label">获取时间戳</span>
+        <input type="text" placeholder="日期时间">
+        <input type="text" placeholder="格式">
+        <button class="btn">转换</button>
+        <div style="margin-top: 20px;"></div>
+        <span class="label">年</span>
+        <span class="label">月</span>
+        <span class="label">日</span>
+        <span class="label">时(24小时)</span>
+        <span class="label">分</span>
+        <span class="label">秒</span>
+        <div class="input-group">
+            <input type="text" placeholder="年" style="width: 40px;">
+            <input type="text" placeholder="月" style="width: 40px;">
+            <input type="text" placeholder="日" style="width: 40px;">
+            <input type="text" placeholder="时(24小时)" style="width: 40px;">
+            <input type="text" placeholder="分" style="width: 40px;">
+            <input type="text" placeholder="秒" style="width: 40px;">
+        </div>
+        <button class="btn" style="width: auto;">转换</button>
+        <div style="margin-top: 20px;"></div>
+        <div class="title">时间戳: 1714808649</div>
+    </div>
+</body>
+</html>
