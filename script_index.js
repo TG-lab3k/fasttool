@@ -1,5 +1,15 @@
 const FORMAT_DEFAULT = 'YYYY-MM-DD HH:mm:ss';
 
+function updateCurrentTime(){
+    var currentTimeInMills = Date.now();
+    var currentTimeDiv = document.querySelector('.current-timestamp');
+    currentTimeDiv.innerHTML = currentTimeInMills;
+}
+
+function launchUpdateCurrentTime() {
+    setInterval(updateCurrentTime, 500);
+}
+
 function convertTimestampToGMT(timestamp, offset) {
     var date = new Date(timestamp);
     var localOffset = date.getTimezoneOffset();
@@ -99,6 +109,7 @@ function bindingEvent(componentName, eventName, action) {
 function app() {
     bindingEvent('.timestamp-datetime-convert', 'click', clickConvertMillisToGMT);
     bindingEvent('.datetime-timestamp-convert', 'click', clickConvertGMTToMillis);
+    launchUpdateCurrentTime();
 }
 
 function boost() {
