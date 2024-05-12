@@ -1,0 +1,32 @@
+input.flat-style-input {
+    background-color:#333333;
+    border: none; 
+    border-bottom: 1px solid white; 
+    padding: 5px; 
+    color: white; 
+    width: 500px; 
+}
+
+input.flat-style-input:focus {
+    outline: none; 
+    border-bottom-color:  white;
+}
+
+
+body.app.app-theme-dark .search-container .form-control::-webkit-input-placeholder{color:#818a91}
+body.app.app-theme-dark .search-container .form-control::-moz-placeholder{color:#818a91}
+body.app.app-theme-dark .search-container .form-control:-ms-input-placeholder{color:#818a91}
+body.app.app-theme-dark .search-container .form-control::-ms-input-placeholder{color:#818a91}
+body.app.app-theme-dark .search-container .form-control::placeholder{color:#818a91}
+body.app.app-theme-dark .search-container .form-control:focus::-webkit-input-placeholder{color:#ffbc34}
+body.app.app-theme-dark .search-container .form-control:focus::-moz-placeholder{color:#ffbc34}
+body.app.app-theme-dark .search-container .form-control:focus:-ms-input-placeholder{color:#ffbc34}
+body.app.app-theme-dark .search-container .form-control:focus::-ms-input-placeholder{color:#ffbc34}
+body.app.app-theme-dark .search-container .form-control:focus::placeholder{color:#ffbc34}
+body.app.app-theme-dark .form-control{background-color:#202328;border-color:#30343c;color:#c2c4c9}
+body.app.app-theme-dark .form-control::-webkit-input-placeholder{color:rgba(129,138,145,.75)}
+body.app.app-theme-dark .form-control::-moz-placeholder{color:rgba(129,138,145,.75)}
+body.app.app-theme-dark .form-control:-ms-input-placeholder{color:rgba(129,138,145,.75)}
+body.app.app-theme-dark .form-control::-ms-input-placeholder{color:rgba(129,138,145,.75)}
+body.app.app-theme-dark .form-control::placeholder{color:rgba(129,138,145,.75)}
+body.app.app-theme-dark .form-control:focus{border-color:rgba(43,205,238,.5)}
