@@ -1,3 +1,8 @@
+.line-group {
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
 input.flat-style-input {
     background-color:#333333;
     border: none; 
