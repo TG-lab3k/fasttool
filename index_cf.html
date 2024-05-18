@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>时间戳转换工具</title>
+    <link href="./style_theme_dark.css" rel="stylesheet" type="text/css">
+    <link href="./style_index.css" rel="stylesheet" type="text/css">
+    <link href="./style_index_v1.css" rel="stylesheet" type="text/css">
+    <style>
+        body.app.app-theme-dark {
+            color: #c2c4c9;
+            background-color: #333333;
+        }
+
+        body.app.app-theme-dark strong {
+            color: #f8f9f9;
+            font-weight: normal
+        }
+
+        body.app.app-theme-dark a {
+            color: #c2c4c9
+        }
+
+        body.app.app-theme-dark a:hover {
+            color: #fff
+        }
+
+        body.app.app-theme-dark .colored-link,
+        body.app.app-theme-dark .horizontal-nav .nav-link .horizontal-nav body.app.app-theme-dark .nav-link,
+        body.app.app-theme-dark .colored-link:hover {
+            color: #2bcdee
+        }
+
+        body.app.app-theme-dark .colored-link.colored-link-visited:visited,
+        body.app.app-theme-dark .horizontal-nav .colored-link-visited.nav-link:visited,
+        .horizontal-nav body.app.app-theme-dark .colored-link-visited.nav-link:visited {
+            color: rgba(43, 205, 238, .65)
+        }
+
+        body.app.app-theme-dark a.yellow-link:not(.any),
+        body.app.app-theme-dark a.yellow-link:not(.any):hover {
+            color: #ffbc34
+        }
+
+        body.app.app-theme-dark .bg-link:hover {
+            background-color: #000
+        }
+
+        body.app.app-theme-dark .color-yellow {
+            color: #ffbc34
+        }
+
+        body.app.app-theme-dark .color-yellow-y1 {
+            color: rgb(255, 157, 0)
+        }
+
+        body.app.app-theme-dark .color-orange {
+            color: #f93
+        }
+
+        body.app.app-theme-dark a.color-orange:hover {
+            color: #f93
+        }
+
+        body.app.app-theme-dark .color-red {
+            color: #ff001c
+        }
+
+        body.app.app-theme-dark .color-green {
+            color: #00b628
+        }
+
+        body.app.app-theme-dark .color-green {
+            color: #00b628
+        }
+
+        body.app.app-theme-dark .color-green-2 {
+            color: #12a47b
+        }
+
+        body.app.app-theme-dark .color-blue {
+            color: #2bcdee
+        }
+
+        body.app.app-theme-dark .color-body {
+            color: #c2c4c9
+        }
+
+        body.app.app-theme-dark .hl {
+            background-color: rgba(255, 153, 51, .2)
+        }
+
+        html,
+        body.app {
+            height: 100%
+        }
+
+        body.app {
+            margin: 0 !important;
+            overflow-y: hidden
+        }
+
+        body.app {
+            padding: 0
+        }
+
+        body.app {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-size: 12px
+        }
+
+        body.app .app-layout {
+            height: 100%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: stretch;
+            -ms-flex-align: stretch;
+            align-items: stretch;
+            -ms-flex-line-pack: stretch;
+            align-content: stretch
+        }
+
+        .app-layout {
+            -webkit-transition: right .5s;
+            transition: right .5s;
+        }
+
+        body .app-layout {
+            position: relative;
+            right: 0
+        }
+
+        .app-left-pane {
+            -ms-flex-preferred-size: 105px;
+            flex-basis: 105px;
+            min-width: 105px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            top: 0px;
+            bottom: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .app-left-pane .left-nav {
+            -ms-flex-preferred-size: 100%;
+            flex-basis: 100%;
+            min-width: 100%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-negative: 0;
+            flex-shrink: 0
+        }
+
+        .app-left-pane .left-nav {
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column
+        }
+
+        .app-left-pane .left-nav .left-nav-item {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-negative: 0;
+            flex-shrink: 0;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            text-decoration: none;
+            opacity: .8;
+            font-size: 11px;
+            -ms-flex-preferred-size: 35px;
+            flex-basis: 35px;
+            position: relative;
+            white-space: nowrap
+        }
+
+        .app-left-pane .left-nav .left-nav-item {
+            padding: 5px 5px 5px 10px;
+            margin-right: -1px;
+            border-top: 1px solid transparent;
+            border-bottom: 1px solid transparent
+        }
+
+        .app-left-pane .left-nav .left-nav-item .icon {
+            font-size: 14px;
+            width: 22px
+        }
+
+        .app-left-pane .left-nav .left-nav-item .icon.icon-crown,
+        .app-left-pane .left-nav .left-nav-item .icon.icon-briefcase {
+            font-size: 13px
+        }
+
+        .app-left-pane .left-nav .left-nav-item:hover {
+            opacity: 1
+        }
+
+        .app-left-pane .left-nav .left-nav-item .icon.icon-caret-right {
+            margin-left: auto;
+            margin-top: 2px;
+            width: auto;
+            font-size: 10px;
+            line-height: 1;
+            opacity: .5
+        }
+
+
+        body.app .app-layout .app-center-pane {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            -webkit-box-flex: 1;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+            min-width: 0;
+            padding-left: 0;
+            padding-right: 0
+        }
+
+        body.app .app-main-container {
+            -webkit-box-flex: 1;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            height: 0
+        }
+
+        body.app .app-main-container .app-content-panes {
+            -webkit-box-flex: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            -ms-flex-preferred-size: 0;
+            flex-basis: 0;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            min-width: 0
+        }
+
+        body.app .app-main-container .app-main-pane,
+        body.app .app-main-container .app-sec-pane {
+            -webkit-box-flex: 1;
+            -ms-flex-positive: 1;
+            flex-grow: 1;
+            -ms-flex-preferred-size: 0;
+            flex-basis: 0;
+            max-width: 50%;
+            border-right-width: 1px;
+            border-right-style: solid;
+        }
+
+        body.app .app-main-container .app-main-pane .news-loader {
+            margin: .625rem;
+            position: absolute;
+            left: 0;
+            display: none;
+            top: 44px
+        }
+
+        .line-group {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        input.flat-style-input {
+            background-color: #333333;
+            border: none;
+            border-bottom: 1px solid white;
+            padding: 5px;
+            color: white;
+            width: 500px;
+        }
+
+        input.flat-style-input:focus {
+            outline: none;
+            border-bottom-color: white;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script>
+        const FORMAT_DEFAULT = 'YYYY-MM-DD HH:mm:ss';
+
+        function updateCurrentTime() {
+            var currentTimeInMills = Date.now();
+            var currentTimeDiv = document.querySelector('.current-timestamp');
+            currentTimeDiv.innerHTML = currentTimeInMills;
+        }
+
+        function launchUpdateCurrentTime() {
+            setInterval(updateCurrentTime, 500);
+        }
+
+        function convertTimestampToGMT(timestamp, offset) {
+            var date = new Date(timestamp);
+            var localOffset = date.getTimezoneOffset();
+            var targetOffset = offset * 60;
+            var offsetDiff = targetOffset - localOffset;
+            date.setTime(date.getTime() + offsetDiff * 60 * 1000);
+            return date.getTime();
+        }
+
+        function parseGMTOffset(gmtOffsetStr) {
+            var offset = parseFloat(gmtOffsetStr.replace("GMT", ""));
+            return offset;
+        }
+
+        function getCurrentUtcOffset() {
+            var now = new Date();
+            var timezoneOffset = now.getTimezoneOffset();
+            var offsetHours = timezoneOffset / 60;
+            var sign = offsetHours >= 0 ? '-' : '+';
+
+            var absOffsetHours = Math.abs(offsetHours);
+            var paddedOffsetHours = ('0' + absOffsetHours).slice(-2);
+
+            var utcOffset = sign + paddedOffsetHours;
+            return utcOffset
+        }
+
+        function convertMillisToGMT(millis, format, offset) {
+            var momentObj = moment.unix(millis);
+            var formattedTime = momentObj.utcOffset(offset).format(format);
+            return formattedTime;
+        }
+
+        function convertGMTToMillis(datetime, format) {
+            var momentObj = moment(datetime, format);
+            //momentObj.utcOffset(2);
+            var millis = momentObj.unix();
+            return millis;
+        }
+
+        function clickConvertMillisToGMT() {
+            var timestampInput = document.querySelector('.timestamp-datetime-text');
+            var formatInput = document.querySelector('.timestamp-datetime-format');
+            var gmtInput = document.querySelector('.timestamp-datetime-timezones');
+            var timestampText = String(timestampInput.value);
+            if (timestampText.trim() === '') {
+                console.log('timestampText is null');
+                return;
+            }
+
+
+            var timestamp = Number(timestampText);
+            var formatText = String(formatInput.value);
+            if (formatText.trim() === '') {
+                formatText = FORMAT_DEFAULT;
+            }
+
+            var gmtText = String(gmtInput.value);
+            var utcOffset = 0;
+            if (gmtText.trim() !== '') {
+                console.log(gmtText);
+                utcOffset = parseGMTOffset(gmtText);
+            }
+
+            if (utcOffset === 0 || utcOffset === NaN) {
+                utcOffset = getCurrentUtcOffset();
+            }
+            console.log('utcOffset', utcOffset);
+            var formattedTime = convertMillisToGMT(timestamp, formatText, utcOffset);
+            var result = document.querySelector('.timestamp-datetime-result');
+            result.innerHTML = formattedTime;
+        }
+
+        function clickConvertGMTToMillis() {
+            var datetimeInput = document.querySelector('.datetime-timestamp-text');
+            var datetimeText = String(datetimeInput.value);
+            if (datetimeText.trim() === '') {
+                return;
+            }
+
+            var formatInput = document.querySelector('.datetime-timestamp-format');
+            var formatText = String(formatInput.value);
+            if (formatText.trim() === '') {
+                formatText = FORMAT_DEFAULT;
+            }
+
+            var millis = convertGMTToMillis(datetimeText, formatText);
+            var resultDiv = document.querySelector('.datetime-timestamp-result');
+            resultDiv.innerHTML = millis;
+        }
+
+        function bindingEvent(componentName, eventName, action) {
+            var component = document.querySelector(componentName);
+            component.addEventListener(eventName, action);
+        }
+
+        function app() {
+            bindingEvent('.timestamp-datetime-convert', 'click', clickConvertMillisToGMT);
+            bindingEvent('.datetime-timestamp-convert', 'click', clickConvertGMTToMillis);
+            launchUpdateCurrentTime();
+        }
+
+        function boost() {
+            window.onload = function () {
+                app();
+            }
+        };
+        boost();
+    </script>
+</head>
+
+<body class="app app-theme-dark">
+    <div class="app-layout">
+        <div class="app-left-pane app-pane">
+            <div class="left-nav" theme="dark">
+                <div style="height: 80px;">
+                </div>
+                <a href="/" class="left-nav-item router-link-exact-active">
+                    <span>时间戳转换</span>
+                </a>
+            </div>
+        </div>
+        <div class="app-center-pane">
+            <div>
+                <div>
+                    <span>当前时间</span>
+                    <span class="title-text color-yellow-y1 current-timestamp"></span>
+                    <span class="colored-link">秒</span>
+                </div>
+
+                <div>
+                    <div class="converter">时间戳转换</div>
+                    <div>
+                        <input class="flat-style-input timestamp-datetime-text" type="text" placeholder="秒/毫秒">
+                    </div>
+                    <div>
+                        <input class="flat-style-input timestamp-datetime-format" type="text" placeholder="格式">
+                    </div>
+                    <div>
+                        <input class="flat-style-input timestamp-datetime-timezones" list="timezones" placeholder="时区">
+                        <datalist id="timezones">
+                            <option value="GMT-12">(GMT-12:00)</option>
+                            <option value="GMT-11">(GMT-11:00) 萨摩亚中途岛</option>
+                            <option value="GMT-10">(GMT-10:00) 夏威夷</option>
+                            <option value="GMT-9">(GMT-9:00)</option>
+                            <option value="GMT-8">(GMT-8:00) 阿拉斯加</option>
+                            <option value="GMT-7">(GMT-7:00) 温哥华</option>
+                            <option value="GMT-6">(GMT-6:00) 山区时间（美国和加拿大）</option>
+                            <option value="GMT-6">(GMT-6:00) 墨西哥城</option>
+                            <option value="GMT-5">(GMT-5:00) 中部时间（美国和加拿大）</option>
+                            <option value="GMT-5">(GMT-5:00) 巴拿马</option>
+                            <option value="GMT-4">(GMT-4:00) 东部时间（美国和加拿大）</option>
+                            <option value="GMT-4">(GMT-4:00) 加拉加斯</option>
+                            <option value="GMT-3">(GMT-3:00) 圣保罗</option>
+                            <option value="GMT-3">(GMT-3:00) 大西洋时间（加拿大）</option>
+                            <option value="GMT-3">(GMT-3:00) 布宜诺斯艾利斯，乔治城</option>
+                            <option value="GMT-2">(GMT-2:00) 费尔南多-迪诺罗尼亚</option>
+                            <option value="GMT-1">(GMT-1:00) 格林兰岛</option>
+                            <option value="GMT+0">(GMT+0:00) 格林威治标准时间</option>
+                            <option value="GMT+0">(GMT+0:00) 世界标准时间UTC</option>
+                            <option value="GMT+0">(GMT+0:00) 雷克雅未克</option>
+                            <option value="GMT+1">(GMT+1:00) 都柏林</option>
+                            <option value="GMT+1">(GMT+1:00) 伦敦</option>
+                            <option value="GMT+1">(GMT+1:00) 里斯本</option>
+                            <option value="GMT+1">(GMT+1:00) 中非西部</option>
+                            <option value="GMT+1">(GMT+1:00) 阿尔及尔</option>
+                            <option value="GMT+1">(GMT+1:00) 突尼斯</option>
+                            <option value="GMT+2">(GMT+2:00) 哥本哈根</option>
+                            <option value="GMT+2">(GMT+2:00) 阿姆斯特丹，柏林，罗马，斯德哥尔摩，维也纳</option>
+                            <option value="GMT+2">(GMT+2:00) 罗马</option>
+                            <option value="GMT+2">(GMT+2:00) 斯德哥尔摩</option>
+                            <option value="GMT+2">(GMT+2:00) 维也纳</option>
+                            <option value="GMT+2">(GMT+2:00) 卢森堡</option>
+                            <option value="GMT+2">(GMT+2:00) 巴黎</option>
+                            <option value="GMT+2">(GMT+2:00) 苏黎世</option>
+                            <option value="GMT+2">(GMT+2:00) 马德里</option>
+                            <option value="GMT+2">(GMT+2:00) 华沙</option>
+                            <option value="GMT+3">(GMT+3:00) 雅典</option>
+                            <option value="GMT+3">(GMT+3:00) 大马士革</option>
+                            <option value="GMT+3">(GMT+3:00) 耶路撒冷</option>
+                            <option value="GMT+3">(GMT+3:00) 安曼</option>
+                            <option value="GMT+3">(GMT+3:00) 开罗</option>
+                            <option value="GMT+3">(GMT+3:00) 莫斯科</option>
+                            <option value="GMT+3">(GMT+3:00) 巴格达</option>
+                            <option value="GMT+3">(GMT+3:00) 科威特</option>
+                            <option value="GMT+3">(GMT+3:00) 卡塔尔</option>
+                            <option value="GMT+3">(GMT+3:00) 基辅</option>
+                            <option value="GMT+3">(GMT+3:30) 德黑兰</option>
+                            <option value="GMT+4">(GMT+4:00) 迪拜</option>
+                            <option value="GMT+4">(GMT+4:00) 巴库，第比利斯，叶里温</option>
+                            <option value="GMT+5">(GMT+5:00) 叶卡捷琳堡</option>
+                            <option value="GMT+5">(GMT+5:00) 阿拉木图</option>
+                            <option value="GMT+5.5">(GMT+5:30) 印度</option>
+                            <option value="GMT+5.5">(GMT+5:30) 孟买，加尔各答，新德里</option>
+                            <option value="GMT+5.5">(GMT+5:30) 科伦坡</option>
+                            <option value="GMT+6">(GMT+6:00) 达卡</option>
+                            <option value="GMT+6">(GMT+6:00) 阿斯塔纳，达卡</option>
+                            <option value="GMT+6.5">(GMT+6:30) 仰光</option>
+                            <option value="GMT+7">(GMT+7:00) 新西伯利亚</option>
+                            <option value="GMT+7">(GMT+7:00) 克拉斯诺亚尔斯克</option>
+                            <option value="GMT+7">(GMT+7:00) 曼谷</option>
+                            <option value="GMT+7">(GMT+7:00) 越南</option>
+                            <option value="GMT+7">(GMT+7:00) 雅加达</option>
+                            <option value="GMT+8">(GMT+8:00) 伊尔库次克，乌兰巴托</option>
+                            <option value="GMT+8">(GMT+8:00) 北京，上海</option>
+                            <option value="GMT+8">(GMT+8:00) 香港特别行政区</option>
+                            <option value="GMT+8">(GMT+8:00) 台北</option>
+                            <option value="GMT+8">(GMT+8:00) 吉隆坡</option>
+                            <option value="GMT+8">(GMT+8:00) 新加坡</option>
+                            <option value="GMT+8">(GMT+8:00) 珀斯</option>
+                            <option value="GMT+9">(GMT+9:00) 首尔</option>
+                            <option value="GMT+9">(GMT+9:00) 大阪，札幌，东京</option>
+                            <option value="GMT+10">(GMT+10:00) 符拉迪沃斯托克</option>
+                            <option value="GMT+10">(GMT+10:00) 关岛，莫尔斯比港</option>
+                            <option value="GMT+10">(GMT+10:00) 布里斯班</option>
+                            <option value="GMT+10">(GMT+10:00) 堪培拉，墨尔本，悉尼</option>
+                            <option value="GMT+11">(GMT+11:00) 所罗门群岛</option>
+                            <option value="GMT+11">(GMT+11:00) 新喀里多尼亚</option>
+                            <option value="GMT+12">(GMT+12:00) 堪察加</option>
+                            <option value="GMT+12">(GMT+12:00) 斐济群岛，马绍尔群岛</option>
+                            <option value="GMT+12">(GMT+12:00) 奥克兰，惠灵顿</option>
+                        </datalist>
+                    </div>
+                    <div>
+                        <button class="flat-style-button timestamp-datetime-convert">转换</button>
+                    </div>
+                    <div>
+                        <div class="timestamp-datetime-result"></div>
+                    </div>
+                </div>
+
+                <div>
+                    <div>获取时间戳</div>
+                    <div>
+                        <div>
+                            <input class="flat-style-input datetime-timestamp-text" type="text" placeholder="日期时间">
+                        </div>
+                        <div>
+                            <input class="flat-style-input datetime-timestamp-format" type="text" placeholder="格式">
+                        </div>
+                        <div>
+                            <button class="flat-style-button datetime-timestamp-convert">转换</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <span class="label">年</span>
+                            <span class="label">月</span>
+                            <span class="label">日</span>
+                            <span class="label">时(24小时)</span>
+                            <span class="label">分</span>
+                            <span class="label">秒</span>
+                        </div>
+
+                        <div class="line-group">
+                            <input type="text" placeholder="年" style="width: 40px;">
+                            <input type="text" placeholder="月" style="width: 40px;">
+                            <input type="text" placeholder="日" style="width: 40px;">
+                            <input type="text" placeholder="时(24小时)" style="width: 40px;">
+                            <input type="text" placeholder="分" style="width: 40px;">
+                            <input type="text" placeholder="秒" style="width: 40px;">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="datetime-timestamp-result"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="app-right-pane">
+        </div>
+    </div>
+</body>
+
+</html>
